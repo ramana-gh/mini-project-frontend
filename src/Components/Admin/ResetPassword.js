@@ -12,7 +12,7 @@ function ResetPassword(props) {
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/admin/reset-password', { adminId, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post('https://department-library.herokuapp.com/admin/reset-password', { adminId, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

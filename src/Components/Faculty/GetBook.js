@@ -31,7 +31,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`http://localhost:3001/faculty/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/faculty/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.book);
       setLoading(false);
@@ -51,7 +51,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`http://localhost:3001/faculty/get-rating/${isbn.value}/${getUser().facultyId}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/faculty/get-rating/${isbn.value}/${getUser().facultyId}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       rating.handleModify(response.data.rating);
       setLoading(false);
@@ -80,7 +80,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post('http://localhost:3001/faculty/rate-book', { isbn: isbn.value, rating: rating.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('https://department-library.herokuapp.com/faculty/rate-book', { isbn: isbn.value, rating: rating.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -100,7 +100,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post('http://localhost:3001/faculty/tag-book', { isbn: isbn.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('https://department-library.herokuapp.com/faculty/tag-book', { isbn: isbn.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

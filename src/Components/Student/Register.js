@@ -18,7 +18,7 @@ function Register(props) {
   const handleRegister = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/student/register', { studentId: studentId.value, name: name.value, joinYear: joinYear.value, sem: sem.value, class: Class.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
+    axios.post('https://department-library.herokuapp.com/student/register', { studentId: studentId.value, name: name.value, joinYear: joinYear.value, sem: sem.value, class: Class.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

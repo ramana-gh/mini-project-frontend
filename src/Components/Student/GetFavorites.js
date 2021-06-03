@@ -15,7 +15,7 @@ function GetFavorites(props) {
     if (!token) {
       return;
     }
-    axios.get('http://localhost:3001/student/get-favorites', {headers: {authorization: `Bearer ${token}`}})
+    axios.get('https://department-library.herokuapp.com/student/get-favorites', {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setBooks([...response.data.books]);

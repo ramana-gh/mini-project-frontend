@@ -12,7 +12,7 @@ function ResetPassword(props) {
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/faculty/reset-password', { facultyId, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post('https://department-library.herokuapp.com/faculty/reset-password', { facultyId, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

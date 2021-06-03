@@ -12,7 +12,7 @@ function Logout(props) {
   const handleLogout = () => {
     setError(error);
     setLoading(loading);
-    axios.post('http://localhost:3001/admin/logout', { adminId }).then(response => {
+    axios.post('https://department-library.herokuapp.com/admin/logout', { adminId }).then(response => {
       setLoading(false);
       props.history.push('/admin/logout');
     }).catch(error => {

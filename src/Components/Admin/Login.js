@@ -23,7 +23,7 @@ function Login(props) {
   const handleLogin = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/admin/login', { adminId: adminId.value, password: password.value }).then(response => {
+    axios.post('https://department-library.herokuapp.com/admin/login', { adminId: adminId.value, password: password.value }).then(response => {
       setLoading(false);
       setUserSession(response.data.token, response.data.user);
       alert(response.data.message);
@@ -54,7 +54,7 @@ function Login(props) {
   const handleForgotPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/admin/forgot-password', { adminId: adminId.value })
+    axios.post('https://department-library.herokuapp.com/admin/forgot-password', { adminId: adminId.value })
     .then(response => {
       setLoading(false);
       setMobile(response.data.mobile);
@@ -71,7 +71,7 @@ function Login(props) {
     setLoading(true);
     clearTimeout(myTimeout);
     clearInterval(myInterval);
-    axios.post('http://localhost:3001/admin/send-otp', { mobile })
+    axios.post('https://department-library.herokuapp.com/admin/send-otp', { mobile })
     .then(response => {
       setLoading(false);
       setRequestId(response.data.request_id);
@@ -107,7 +107,7 @@ function Login(props) {
   const handleVerifyOtp = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/admin/verify-otp', { otp: otp.value, requestId })
+    axios.post('https://department-library.herokuapp.com/admin/verify-otp', { otp: otp.value, requestId })
     .then(response => {
       setLoading(false);
       if (response.status === 200) {
@@ -131,7 +131,7 @@ function Login(props) {
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('http://localhost:3001/admin/reset-password', { adminId: adminId.value, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post('https://department-library.herokuapp.com/admin/reset-password', { adminId: adminId.value, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

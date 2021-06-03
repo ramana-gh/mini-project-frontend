@@ -24,7 +24,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.get(`http://localhost:3001/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.user);
       setLoading(false);
@@ -56,7 +56,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.patch('http://localhost:3001/faculty/update-profile', { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch('https://department-library.herokuapp.com/faculty/update-profile', { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -78,7 +78,7 @@ function Profile(props) {
     }
     removeUserSession();
     setLoading(true);
-    axios.delete('http://localhost:3001/faculty/delete-account', {headers: {authorization: `Bearer ${token}`}})
+    axios.delete('https://department-library.herokuapp.com/faculty/delete-account', {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
