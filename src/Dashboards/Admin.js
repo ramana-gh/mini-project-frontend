@@ -49,6 +49,7 @@ function Dashboard() {
   return (
     <div className='Admin'>
       <Router>
+        <Switch>
         <div>
           <div className='header'>
             <div>
@@ -121,7 +122,7 @@ function Dashboard() {
             </div>
           </div>
           <div className='content'>
-            <Switch>
+            {/* <Switch> */}
               <AdminRoute exact path='/admin/profile' component={Profile} />
               <AdminRoute exact path='/admin/logout' component={Public} />
               <PublicRoute exact path='/admin/delete' component={Public} />
@@ -134,9 +135,10 @@ function Dashboard() {
               <AdminRoute exact path='/admin/orders' component={Orders} />
               <Route exact path='/about' component={About} />
               <Route exact path='/contact' component={Contact} />
-            </Switch>
+            {/* </Switch> */}
           </div>
         </div>
+        </Switch>
       </Router>
     </div>
   );
