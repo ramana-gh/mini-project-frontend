@@ -28,17 +28,7 @@ import Student from '../Dashboards/Student';
 
 import NotFound from '../Components/Public/NotFound';
 
-import { getUser, getToken } from '../Utils/Common';
-
 function Dashboard() {
-
-  if (getToken() && getUser().role === 'admin')
-    return Admin;
-  if (getToken() && getUser().role === 'faculty')
-    return Faculty;
-  if (getToken() && getUser().role === 'student')
-    return Student;
-
   return (
     <div className='Public'>
       <Router>
@@ -133,6 +123,7 @@ function Dashboard() {
                 <AdminRoute path='/admin/home' component={Admin} />
                 <FacultyRoute path='/faculty/home' component={Faculty} />
                 <StudentRoute path='/student/home' component={Student} />
+                <Route path='/admin' render={(props) => <Admin {...props} /> }/>
                 <Route path='/admin' component={Admin} />
                 <Route path='/faculty' component={Faculty} />
                 <Route path='/student' component={Student} />
