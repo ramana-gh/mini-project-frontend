@@ -28,7 +28,17 @@ import Student from '../Dashboards/Student';
 
 import NotFound from '../Components/Public/NotFound';
 
+import { getUser, getToken } from '../Utils/Common';
+
 function Dashboard() {
+
+  if (getToken() && getUser().role === 'admin')
+    return Admin;
+  if (getToken() && getUser().role === 'faculty')
+    return Faculty;
+  if (getToken() && getUser().role === 'student')
+    return Student;
+
   return (
     <div className='Public'>
       <Router>
