@@ -5,7 +5,7 @@ function Home(props) {
 
     const message = () => {
         axios.get('https://department-library.herokuapp.com/admin/test').then(response => {
-            alert("Hi");
+            alert(response.data.test);
             props.history.push('/about');
         }).catch(error => {
             if (error) alert("Something went wrong. Please try again later.");
