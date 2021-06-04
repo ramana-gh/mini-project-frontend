@@ -13,7 +13,8 @@ function Home(props) {
     }
 
     return (
-        <div onLoad={message}>
+        <div>
+            <button onClick={message}>Click me!</button>
             <h1 className='info'>An interface for RGUKT Basar library.</h1>
             <h2 className='info'>Students: Search, Favorite and Order Books at your fingertips. No more hassle.</h2>
             <h2 className='info'>Faculty: Search, Tag and Rate Books to help students.</h2>
