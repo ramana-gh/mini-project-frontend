@@ -34,7 +34,7 @@ import { getUser, getToken} from '../Utils/Common';
 
 function Dashboard() {
   
-  const headerRight = useTokenState(null);
+  const headerRight = useTokenState(getHeaderRight());
 
   useEffect(() => {
     headerRight.handleModify(getHeaderRight());
