@@ -32,6 +32,7 @@ function Dashboard() {
   return (
     <div className='Public'>
       <Router>
+        <Switch>
         <div>
             <div className='header'>
               <div>
@@ -100,7 +101,7 @@ function Dashboard() {
               </div>
             </div>
             <div className='content'>
-              <Switch>
+              {/* <Switch> */}
                 <Redirect exact from="/" to="/home" />
                 <PublicRoute exact path='/home' component={Home} />
                 <Route exact path='/about' component={About} />
@@ -127,9 +128,10 @@ function Dashboard() {
                 <Route path='/faculty' component={Faculty} />
                 <Route path='/student' component={Student} />
                 <Route component={NotFound} />
-              </Switch>
+              {/* </Switch> */}
             </div>
         </div>
+        </Switch>
       </Router>
     </div>
   );
