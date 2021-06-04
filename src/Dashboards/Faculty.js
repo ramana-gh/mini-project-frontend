@@ -48,6 +48,66 @@ function Dashboard() {
     <div className='Faculty'>
       <Router>
         <div>
+          <div className='header'>
+            <div>
+              <div className='header-top-left'>
+                <NavLink exact activeClassName="active" to="/faculty/home">
+                <li>
+                  <ul><img src={rgukt_logo} alt='rgukt_logo' /></ul>
+                  <ul><p className='sep'>|</p></ul>
+                  <ul>
+                  <div className='app-name'>
+                    <h1 className='white'>RGUKT Basar</h1>
+                    <h2 className='white'>Department Library</h2>
+                    <p className='white'>(Computer Science Engineering)</p>
+                  </div>
+                  </ul>
+                </li>
+                </NavLink>
+              </div>
+              <div>
+                <div className='header-bottom-right'>
+                  <div className='menu'>
+                    <ul>
+                      <ul>
+                        <NavLink  className='white' exact activeClassName="active" to="/faculty/home">
+                          <div className='menu-item'>Home</div>
+                        </NavLink>
+                      </ul>
+                      <ul>
+                        <NavLink  className='white' exact activeClassName="active" to="/faculty/search-books">
+                          <div className='menu-item'>Search</div>
+                        </NavLink>
+                      </ul>
+                      <ul>
+                        <NavLink className='white' activeClassName="active" to="/about">
+                          <div className='menu-item'>About</div>
+                        </NavLink>
+                      </ul>
+                      <ul>
+                        <NavLink className='white' activeClassName="active" to="/contact">
+                          <div className='menu-item'>Contact</div>
+                        </NavLink>
+                      </ul>
+                    </ul>
+                  </div>
+                </div>
+                <div className='header-top-right'>
+                    <li>
+                      <ul>
+                        <div class="dropdown">
+                          <button class="dropbtn">{getUser().name}</button>
+                          <div class="dropdown-content">
+                            <NavLink exact activeClassName="active" to="/faculty/profile">Profile</NavLink>
+                            <NavLink exact activeClassName="active" to="/faculty/logout">Log out</NavLink>
+                          </div>
+                        </div> 
+                      </ul>
+                    </li>
+                  </div>
+              </div>
+            </div>
+          </div>
           <div className='content'>
             <Switch>
               <FacultyRoute exact path='/faculty/profile' component={Profile} />
