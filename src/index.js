@@ -17,7 +17,7 @@ function App() {
                 <Route path='/admin' component={Admin} />
                 <Route path='/faculty' component={Faculty} />
                 <Route path='/student' component={Student} />
-                <Route component={Public} />
+                <Route path='/' component={Public} />
             </Switch>
             <div className='footer'>
                 <p>&copy; {new Date().getFullYear()} RGUKT Basar. All rights reserved.</p>
