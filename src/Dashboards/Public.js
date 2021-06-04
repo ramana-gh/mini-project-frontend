@@ -191,7 +191,7 @@ function Dashboard() {
       );
     } else if (getUser().role==='student') {
       return (
-        <div hidden={getToken()&&getUser().role==='student'?false:true}>
+        <div>
           <div className='header-bottom-right'>
             <div className='menu'>
               <ul>
@@ -267,7 +267,7 @@ function Dashboard() {
                   </li>
                   </NavLink>
                 </div>
-                {getHeaderRight()}
+                <div {...headerRight} />
               </div>
             </div>
             <div className='content'>
