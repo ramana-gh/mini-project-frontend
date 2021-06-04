@@ -102,7 +102,6 @@ function Dashboard() {
             <div className='content'>
               <Switch>
                 <Redirect exact from="/" to="/home" />
-                <Redirect from="/admin" to="/admin" />
                 <PublicRoute exact path='/home' component={Home} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/contact' component={Contact} />
