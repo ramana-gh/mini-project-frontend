@@ -140,7 +140,7 @@ function Dashboard() {
                       <li>
                         <ul>
                           <div class="dropdown">
-                            <button class="dropbtn">{getUser().name}</button>
+                            <button class="dropbtn">{getToken() && getUser().name}</button>
                             <div class="dropdown-content">
                               <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
                               <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
@@ -181,7 +181,7 @@ function Dashboard() {
                       <li>
                         <ul>
                           <div class="dropdown">
-                            <button class="dropbtn">{getUser().name}</button>
+                            <button class="dropbtn">{getToken() && getUser().name}</button>
                             <div class="dropdown-content">
                               <NavLink exact activeClassName="active" to="/faculty/profile">Profile</NavLink>
                               <NavLink exact activeClassName="active" to="/faculty/logout">Log out</NavLink>
@@ -232,7 +232,7 @@ function Dashboard() {
                       <li>
                         <ul>
                           <div class="dropdown">
-                            <button class="dropbtn">{getUser().name}</button>
+                            <button class="dropbtn">{getToken() && getUser().name}</button>
                             <div class="dropdown-content">
                               <NavLink exact activeClassName="active" to="/student/profile">Profile</NavLink>
                               <NavLink exact activeClassName="active" to="/student/logout">Log out</NavLink>
