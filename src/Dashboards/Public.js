@@ -123,7 +123,6 @@ function Dashboard() {
                 <AdminRoute path='/admin/home' component={Admin} />
                 <FacultyRoute path='/faculty/home' component={Faculty} />
                 <StudentRoute path='/student/home' component={Student} />
-                <Route path='/admin' render={(props) => <Admin {...props} /> }/>
                 <Route path='/admin' component={Admin} />
                 <Route path='/faculty' component={Faculty} />
                 <Route path='/student' component={Student} />
