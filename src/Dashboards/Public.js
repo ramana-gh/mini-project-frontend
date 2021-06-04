@@ -31,6 +31,213 @@ import NotFound from '../Components/Public/NotFound';
 import { getUser, getToken} from '../Utils/Common';
 
 function Dashboard() {
+  
+  const getHeaderRight = () => {
+    if (!getToken()) {
+      return (
+        <div >
+          <div className='header-bottom-right'>
+            <div className='menu'>
+              <ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/home">
+                    <div className='menu-item'>Home</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/about">
+                    <div className='menu-item'>About</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/contact">
+                    <div className='menu-item'>Contact</div>
+                  </NavLink>
+                </ul>
+              </ul>
+            </div>
+          </div>
+          <div className='header-top-right'>
+              <li>
+                <ul>
+                  <div class="dropdown">
+                    <button class="dropbtn">Log in</button>
+                    <div class="dropdown-content">
+                      <NavLink activeClassName="active" to="/admin/login">Admin</NavLink>
+                      <NavLink activeClassName="active" to="/faculty/login">Faculty</NavLink>
+                      <NavLink activeClassName="active" to="/student/login">Student</NavLink>
+                    </div>
+                  </div> 
+                </ul>
+                <ul>
+                  <div class="dropdown">
+                    <button class="dropbtn">Register</button>
+                    <div class="dropdown-content">
+                      <NavLink activeClassName="active" to="/admin/register">Admin</NavLink>
+                      <NavLink activeClassName="active" to="/faculty/register">Faculty</NavLink>
+                      <NavLink activeClassName="active" to="/student/register">Student</NavLink>
+                    </div>
+                  </div> 
+                </ul>
+              </li>
+            </div>
+        </div>
+      );
+    } else if (getUser().role==='admin') {
+      return (
+        <div>
+          <div className='header-bottom-right'>
+            <div className='menu'>
+              <ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/admin/home">
+                    <div className='menu-item'>Home</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/admin/search-books">
+                    <div className='menu-item'>Search</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/admin/add-book">
+                    <div className='menu-item'>Add Book</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/admin/orders">
+                    <div className='menu-item'>Orders</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/about">
+                    <div className='menu-item'>About</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/contact">
+                    <div className='menu-item'>Contact</div>
+                  </NavLink>
+                </ul>
+              </ul>
+            </div>
+          </div>
+          <div className='header-top-right'>
+              <li>
+                <ul>
+                  <div class="dropdown">
+                    <button class="dropbtn">{getToken() && getUser().name}</button>
+                    <div class="dropdown-content">
+                      <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
+                      <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
+                    </div>
+                  </div> 
+                </ul>
+              </li>
+            </div>
+        </div>
+      );
+    } else if (getUser().role==='faculty') {
+      return (
+        <div>
+          <div className='header-bottom-right'>
+            <div className='menu'>
+              <ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/faculty/home">
+                    <div className='menu-item'>Home</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/faculty/search-books">
+                    <div className='menu-item'>Search</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/about">
+                    <div className='menu-item'>About</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/contact">
+                    <div className='menu-item'>Contact</div>
+                  </NavLink>
+                </ul>
+              </ul>
+            </div>
+          </div>
+          <div className='header-top-right'>
+              <li>
+                <ul>
+                  <div class="dropdown">
+                    <button class="dropbtn">{getToken() && getUser().name}</button>
+                    <div class="dropdown-content">
+                      <NavLink exact activeClassName="active" to="/faculty/profile">Profile</NavLink>
+                      <NavLink exact activeClassName="active" to="/faculty/logout">Log out</NavLink>
+                    </div>
+                  </div> 
+                </ul>
+              </li>
+            </div>
+        </div>
+      );
+    } else if (getUser().role==='student') {
+      return (
+        <div hidden={getToken()&&getUser().role==='student'?false:true}>
+          <div className='header-bottom-right'>
+            <div className='menu'>
+              <ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/student/home">
+                    <div className='menu-item'>Home</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/student/search-books">
+                    <div className='menu-item'>Search</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/student/orders">
+                    <div className='menu-item'>Orders</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink  className='white' exact activeClassName="active" to="/student/get-favorites">
+                    <div className='menu-item'>Favorites</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/about">
+                    <div className='menu-item'>About</div>
+                  </NavLink>
+                </ul>
+                <ul>
+                  <NavLink className='white' activeClassName="active" to="/contact">
+                    <div className='menu-item'>Contact</div>
+                  </NavLink>
+                </ul>
+              </ul>
+            </div>
+          </div>
+          <div className='header-top-right'>
+              <li>
+                <ul>
+                  <div class="dropdown">
+                    <button class="dropbtn">{getToken() && getUser().name}</button>
+                    <div class="dropdown-content">
+                      <NavLink exact activeClassName="active" to="/student/profile">Profile</NavLink>
+                      <NavLink exact activeClassName="active" to="/student/logout">Log out</NavLink>
+                    </div>
+                  </div> 
+                </ul>
+              </li>
+            </div>
+        </div>
+      );
+    }
+  }
+
   return (
     <div className='Public'>
       <Router>
@@ -52,60 +259,7 @@ function Dashboard() {
                   </li>
                   </NavLink>
                 </div>
-                
-                <div>
-                  <div className='header-bottom-right'>
-                    <div className='menu'>
-                      <ul>
-                        <ul>
-                          <NavLink  className='white' exact activeClassName="active" to="/admin/home">
-                            <div className='menu-item'>Home</div>
-                          </NavLink>
-                        </ul>
-                        <ul>
-                          <NavLink  className='white' exact activeClassName="active" to="/admin/search-books">
-                            <div className='menu-item'>Search</div>
-                          </NavLink>
-                        </ul>
-                        <ul>
-                          <NavLink  className='white' exact activeClassName="active" to="/admin/add-book">
-                            <div className='menu-item'>Add Book</div>
-                          </NavLink>
-                        </ul>
-                        <ul>
-                          <NavLink  className='white' exact activeClassName="active" to="/admin/orders">
-                            <div className='menu-item'>Orders</div>
-                          </NavLink>
-                        </ul>
-                        <ul>
-                          <NavLink className='white' activeClassName="active" to="/about">
-                            <div className='menu-item'>About</div>
-                          </NavLink>
-                        </ul>
-                        <ul>
-                          <NavLink className='white' activeClassName="active" to="/contact">
-                            <div className='menu-item'>Contact</div>
-                          </NavLink>
-                        </ul>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className='header-top-right'>
-                      <li>
-                        <ul>
-                          <div class="dropdown">
-                            <button class="dropbtn">{getToken() && getUser().name}</button>
-                            <div class="dropdown-content">
-                              <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
-                              <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
-                            </div>
-                          </div> 
-                        </ul>
-                      </li>
-                    </div>
-                </div>
-                
-                
+                {getHeaderRight()}
               </div>
             </div>
             <div className='content'>
