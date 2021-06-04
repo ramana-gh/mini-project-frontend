@@ -30,7 +30,7 @@ import NotFound from '../Components/Public/NotFound';
 
 function Dashboard() {
   return (
-    <div className='Public'>
+    <div className='Page'>
       <Router>
         <div>
             <div className='header'>
