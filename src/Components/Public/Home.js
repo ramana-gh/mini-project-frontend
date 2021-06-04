@@ -4,7 +4,7 @@ import axios from 'axios';
 function Home(props) {
 
     const message = () => {
-        axios.post('https://department-library.herokuapp.com/admin/test').then(response => {
+        axios.get('https://department-library.herokuapp.com/admin/test').then(response => {
             alert(response.data.test);
             props.history.push('/about');
         }).catch(error => {
