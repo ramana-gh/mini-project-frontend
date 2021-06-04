@@ -120,8 +120,7 @@ function Dashboard() {
                 <StudentRoute exact path='/student/logout' component={StudentLogout} />
                 <PublicRoute exact path='/student/delete' component={Delete} />
                 <PublicRoute exact path='/student/reset' component={Reset} />
-                <AdminRoute exact path='/admin/home' render={(props) => <Admin {...props} /> }/>
-                {/* <AdminRoute path='/admin/home' component={Admin} /> */}
+                <AdminRoute path='/admin/home' component={Admin} />
                 <FacultyRoute path='/faculty/home' component={Faculty} />
                 <StudentRoute path='/student/home' component={Student} />
                 <Route path='/admin' component={Admin} />
