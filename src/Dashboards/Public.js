@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Redirect, Route, NavLink } from 'react-router-dom';
 
+import { useState, useEffect } from 'react';
+
 import rgukt_logo from '../rgukt_logo.png'
 import PublicRoute from '../Utils/PublicRoute';
 import AdminRoute from '../Utils/AdminRoute';
@@ -32,6 +34,12 @@ import { getUser, getToken} from '../Utils/Common';
 
 function Dashboard() {
   
+  const headerRight = useTokenState(null);
+
+  useEffect(() => {
+    headerRight.handleModify(getHeaderRight());
+  }, []);
+
   const getHeaderRight = () => {
     if (!getToken()) {
       return (
@@ -296,6 +304,17 @@ function Dashboard() {
       </Router>
     </div>
   );
+}
+
+const useTokenState = initialValue => {
+  const [value, setValue] = useState(initialValue);
+  const handleChange = e => setValue(e.target.value);
+  const handleModify = val => setValue(val);
+  return {
+    value,
+    handleModify,
+    onChange: handleChange
+  }
 }
 
 export default Dashboard;
