@@ -54,6 +54,11 @@ function Dashboard() {
                   <div className='header-bottom-right'>
                     <div className='menu'>
                       <ul>
+                      <ul>
+                          <NavLink  className='white' exact activeClassName="active" to="/home">
+                            <div className='menu-item'>Home</div>
+                          </NavLink>
+                        </ul>
                         <ul>
                           <NavLink  className='white' exact activeClassName="active" to="/home">
                             <div className='menu-item'>Home</div>
