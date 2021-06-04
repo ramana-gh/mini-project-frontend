@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect, Route, NavLink } from 'react-router-dom';
 
 import rgukt_logo from '../rgukt_logo.png'
 import PublicRoute from '../Utils/PublicRoute';
@@ -101,6 +101,7 @@ function Dashboard() {
             </div>
             <div className='content'>
               <Switch>
+                <Redirect exact from="/" to="/home" />
                 <PublicRoute exact path='/home' component={Home} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/contact' component={Contact} />
