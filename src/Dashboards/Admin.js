@@ -42,9 +42,9 @@ function Dashboard() {
     });
   }, []);
 
-  if (authLoading && getToken()) {
-    return <div className="content">Checking Authentication...</div>
-  }
+  // if (authLoading && getToken()) {
+  //   return <div className="content">Checking Authentication...</div>
+  // }
 
   return (
     <div className='Admin'>
