@@ -43,14 +43,12 @@ function Dashboard() {
   }, []);
 
   if (authLoading && getToken()) {
-    return 
+    return <div className="content">Checking Authentication...</div>
   }
 
   return (
     <div className='Admin'>
-      <div hidden={authLoading && getToken()?true:false} className="content">Checking Authentication...</div>
-      <div hidden={authLoading && getToken()?false:true}>
-        <Router>
+      <Router>
         <div>
           <div className='header'>
             <div>
@@ -140,7 +138,6 @@ function Dashboard() {
           </div>
         </div>
       </Router>
-      </div>
     </div>
   );
 }
