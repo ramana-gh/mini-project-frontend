@@ -48,7 +48,7 @@ function Dashboard() {
     <div className='Faculty'>
       <Router>
         <div>
-          <div className='header'>
+          {/* <div className='header'>
             <div>
               <div className='header-top-left'>
                 <NavLink exact activeClassName="active" to="/faculty/home">
@@ -108,6 +108,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
+           */}
           <div className='content'>
             <Switch>
               <FacultyRoute exact path='/faculty/profile' component={Profile} />
