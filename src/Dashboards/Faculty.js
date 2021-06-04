@@ -45,7 +45,7 @@ function Dashboard() {
   }
 
   return (
-    <div className='Page'>
+    <div className='Faculty'>
       <Router>
         <div>
           <div className='header'>
