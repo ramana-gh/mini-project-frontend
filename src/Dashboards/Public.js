@@ -28,6 +28,8 @@ import Student from '../Dashboards/Student';
 
 import NotFound from '../Components/Public/NotFound';
 
+import { getUser, getToken } from '../Utils/Common';
+
 function Dashboard() {
   return (
     <div className='Public'>
@@ -58,6 +60,21 @@ function Dashboard() {
                           <NavLink  className='white' exact activeClassName="active" to="/home">
                             <div className='menu-item'>Home</div>
                           </NavLink>
+                        </ul>
+                        <ul>
+                          {getToken() && <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/search-books`}>
+                            <div className='menu-item'>Search</div>
+                          </NavLink>}
+                        </ul>
+                        <ul>
+                        {getToken() && getUser().role === 'admin' && <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/add-book`}>
+                            <div className='menu-item'>Add Book</div>
+                          </NavLink>}
+                        </ul>
+                        <ul>
+                        {getToken() && getUser().role !== 'faculty' && <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/orders`}>
+                            <div className='menu-item'>Orders</div>
+                          </NavLink>}
                         </ul>
                         <ul>
                           <NavLink className='white' activeClassName="active" to="/about">
