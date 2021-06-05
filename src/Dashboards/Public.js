@@ -28,8 +28,6 @@ import Student from '../Dashboards/Student';
 
 import NotFound from '../Components/Public/NotFound';
 
-import { getUser, getToken } from '../Utils/Common';
-
 function Dashboard() {
   return (
     <div className='Public'>
@@ -62,21 +60,6 @@ function Dashboard() {
                           </NavLink>
                         </ul>
                         <ul>
-                          {getToken() && <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/search-books`}>
-                            <div className='menu-item'>Search</div>
-                          </NavLink>}
-                        </ul>
-                        <ul>
-                        {getToken() && getUser().role === 'admin' && <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/add-book`}>
-                            <div className='menu-item'>Add Book</div>
-                          </NavLink>}
-                        </ul>
-                        <ul>
-                        {getToken() && getUser().role !== 'faculty' && <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/orders`}>
-                            <div className='menu-item'>Orders</div>
-                          </NavLink>}
-                        </ul>
-                        <ul>
                           <NavLink className='white' activeClassName="active" to="/about">
                             <div className='menu-item'>About</div>
                           </NavLink>
@@ -92,33 +75,24 @@ function Dashboard() {
                   <div className='header-top-right'>
                       <li>
                         <ul>
-                        {!getToken() && <div class="dropdown">
+                          <div class="dropdown">
                             <button class="dropbtn">Log in</button>
                             <div class="dropdown-content">
                               <NavLink activeClassName="active" to="/admin/login">Admin</NavLink>
                               <NavLink activeClassName="active" to="/faculty/login">Faculty</NavLink>
                               <NavLink activeClassName="active" to="/student/login">Student</NavLink>
                             </div>
-                          </div> }
+                          </div> 
                         </ul>
                         <ul>
-                          {!getToken() && <div class="dropdown">
+                          <div class="dropdown">
                             <button class="dropbtn">Register</button>
                             <div class="dropdown-content">
                               <NavLink activeClassName="active" to="/admin/register">Admin</NavLink>
                               <NavLink activeClassName="active" to="/faculty/register">Faculty</NavLink>
                               <NavLink activeClassName="active" to="/student/register">Student</NavLink>
                             </div>
-                          </div> }
-                        </ul>
-                        <ul>
-                          {getToken() && <div class="dropdown">
-                            <button class="dropbtn">{getUser().name}</button>
-                            <div class="dropdown-content">
-                              <NavLink exact activeClassName="active" to={`/${getUser().role}/profile`}>Profile</NavLink>
-                              <NavLink exact activeClassName="active" to={`/${getUser().role}/logout`}>Log out</NavLink>
-                            </div>
-                          </div> }
+                          </div> 
                         </ul>
                       </li>
                     </div>
