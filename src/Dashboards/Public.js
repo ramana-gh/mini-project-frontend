@@ -77,32 +77,32 @@ function Dashboard() {
                   <div className='header-bottom-right'>
                     <div className='menu'>
                       <ul>
-                        <ul hidden={getToken()!=null}>
+                        <ul hidden={getToken()!==null}>
                           <NavLink  className='white' exact activeClassName="active" to="/home">
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={getToken()==null}>
+                        <ul hidden={getToken()===null}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/home`}>
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={getToken()==null}>
+                        <ul hidden={getToken()===null}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/search-books`}>
                             <div className='menu-item'>Search</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={!(getToken()!=null&&getUser().role=='admin')}>
+                        <ul hidden={!(getToken()!==null&&getUser().role==='admin')}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/add-book`}>
                             <div className='menu-item'>Add Book</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={!(getToken()!=null&&getUser().role!='faculty')}>
+                        <ul hidden={!(getToken()!==null&&getUser().role!=='faculty')}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/orders`}>
                             <div className='menu-item'>Orders</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={!(getToken()!=null&&getUser().role=='student')}>
+                        <ul hidden={!(getToken()!==null&&getUser().role==='student')}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/get-favorites`}>
                             <div className='menu-item'>Favorites</div>
                           </NavLink>
@@ -121,7 +121,7 @@ function Dashboard() {
                     </div>
                   </div>
                   <div className='header-top-right'>
-                      <li hidden={getToken()!=null}>
+                      <li hidden={getToken()!==null}>
                         <ul>
                           <div class="dropdown">
                             <button class="dropbtn">Log in</button>
@@ -143,7 +143,7 @@ function Dashboard() {
                           </div> 
                         </ul>
                       </li>
-                      <li hidden={getToken()==null}>
+                      <li hidden={getToken()===null}>
                         <ul>
                           <div class="dropdown">
                             <button class="dropbtn">{getToken()?getUser().name:''}</button>
@@ -160,6 +160,9 @@ function Dashboard() {
             </div>
             <div className='content'>
               <Switch>
+                <Redirect exact from="/" to="/home" />
+                <PublicRoute exact path='/home' component={Home} />
+
                 <AdminRoute exact path='/admin/profile' component={AdminProfile} />
                 <AdminRoute exact path='/admin/reset-password' component={AdminResetPassword} />
                 <AdminRoute exact path='/admin/home' component={AdminHome} />
@@ -182,8 +185,6 @@ function Dashboard() {
                 <StudentRoute exact path='/student/get-favorites' component={StudentGetFavorites} />
                 <StudentRoute exact path='/student/orders' component={StudentOrders} />
 
-                <Redirect exact from="/" to="/home" />
-                <PublicRoute exact path='/home' component={Home} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/contact' component={Contact} />
                 <PublicRoute exact path='/admin/register' component={AdminRegister} />
