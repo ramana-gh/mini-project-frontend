@@ -45,9 +45,28 @@ import StudentGetFavorites from '../Components/Student/GetFavorites';
 import StudentOrders from '../Components/Student/Orders';
 
 import NotFound from '../Components/Public/NotFound';
-import { getToken, getUser } from '../Utils/Common';
+import { getToken, getUser, removeUserSession, setUserSession } from '../Utils/Common';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function Dashboard() {
+  var token;
+
+  useEffect(() => {
+    token = getToken();
+    if (!token) {
+      return;
+    }
+
+    axios.get(`http://localhost:3001/student/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
+    .then(response => {
+      setUserSession(response.data.token, response.data.user);
+    })
+    .catch(error => {
+      removeUserSession();
+    });
+  }, []);
+
   return (
     <div className='Public'>
       <Router>
@@ -55,7 +74,7 @@ function Dashboard() {
             <div className='header'>
               <div>
                 <div className='header-top-left'>
-                  <NavLink exact activeClassName="active" to={`/${getToken()?getUser().role:''}/home`}>
+                  <NavLink exact activeClassName="active" to={'/home'}>
                   <li>
                     <ul><img src={rgukt_logo} alt='rgukt_logo' /></ul>
                     <ul><p className='sep'>|</p></ul>
@@ -78,22 +97,22 @@ function Dashboard() {
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
-                        {getToken() && <ul>
+                        {token && <ul>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/search-books`}>
                             <div className='menu-item'>Search</div>
                           </NavLink>
                         </ul>}
-                        {getToken() && getUser().role==='admin' && <ul>
+                        {token && getUser().role==='admin' && <ul>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/add-book`}>
                             <div className='menu-item'>Add Book</div>
                           </NavLink>
                         </ul>}
-                        {getToken() && getUser().role!=='faculty' && <ul>
+                        {token && getUser().role!=='faculty' && <ul>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/orders`}>
                             <div className='menu-item'>Orders</div>
                           </NavLink>
                         </ul>}
-                        {getToken() && getUser().role==='student' && <ul>
+                        {token && getUser().role==='student' && <ul>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/get-favorites`}>
                             <div className='menu-item'>Favorites</div>
                           </NavLink>
@@ -113,7 +132,7 @@ function Dashboard() {
                   </div>
                   <div className='header-top-right'>
                     <li>
-                      {!getToken() && <ul>
+                      {!token && <ul>
                         <div class="dropdown">
                           <button class="dropbtn">Log in</button>
                           <div class="dropdown-content">
@@ -123,7 +142,7 @@ function Dashboard() {
                           </div>
                         </div> 
                       </ul>}
-                      {!getToken() && <ul>
+                      {!token && <ul>
                         <div class="dropdown">
                           <button class="dropbtn">Register</button>
                           <div class="dropdown-content">
@@ -133,7 +152,7 @@ function Dashboard() {
                           </div>
                         </div> 
                       </ul>}
-                      {getToken() && <ul>
+                      {token && <ul>
                         <div class="dropdown">
                           <button class="dropbtn">{getUser().name}</button>
                           <div class="dropdown-content">
