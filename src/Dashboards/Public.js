@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Redirect, Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 import rgukt_logo from '../rgukt_logo.png'
 import PublicRoute from '../Utils/PublicRoute';
@@ -51,29 +51,30 @@ import StudentGetFavorites from '../Components/Student/GetFavorites';
 import StudentOrders from '../Components/Student/Orders';
 
 import NotFound from '../Components/Public/NotFound';
-import { getToken, getUser, setUserSession, removeUserSession } from '../Utils/Common';
+// import { getToken, getUser, setUserSession, removeUserSession } from '../Utils/Common';
+import { getToken, getUser } from '../Utils/Common';
 
 function Dashboard() {
-  const [authLoading, setAuthLoading] = useState(true);
+  // const [authLoading, setAuthLoading] = useState(true);
 
-  useEffect(() => {
-    const token = getToken();
-    if (token) {
-      axios.get(`http://localhost:3001/${getUser().role}/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
-      .then(response => {
-        setUserSession(response.data.token, response.data.user);
-        setAuthLoading(false);
-      })
-      .catch(error => {
-        removeUserSession();
-        setAuthLoading(false);
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = getToken();
+  //   if (token) {
+  //     axios.get(`http://localhost:3001/${getUser().role}/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
+  //     .then(response => {
+  //       setUserSession(response.data.token, response.data.user);
+  //       setAuthLoading(false);
+  //     })
+  //     .catch(error => {
+  //       removeUserSession();
+  //       setAuthLoading(false);
+  //     });
+  //   }
+  // }, []);
 
-  if (authLoading && getToken()) {
-    return <div className="content">Checking Authentication...</div>
-  }
+  // if (authLoading && getToken()) {
+  //   return <div className="content">Checking Authentication...</div>
+  // }
 
   return (
     <div className='Public'>
@@ -100,33 +101,33 @@ function Dashboard() {
                   <div className='header-bottom-right'>
                     <div className='menu'>
                       <ul>
-                        <ul hidden={getToken()!==null}>
+                        <ul>
                           <NavLink  className='white' exact activeClassName="active" to="/home">
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={getToken()===null}>
+                        {/* <ul hidden={getToken()===null}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/home`}>
                             <div className='menu-item'>Home</div>
                           </NavLink>
-                        </ul>
-                        {getToken() && <ul hidden={getToken()===null}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/search-books`}>
+                        </ul> */}
+                        {getToken() && <ul>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/search-books`}>
                             <div className='menu-item'>Search</div>
                           </NavLink>
                         </ul>}
-                        {getToken() && <ul hidden={!(getToken()!==null&&getUser().role==='admin')}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/add-book`}>
+                        {getToken() && getUser().role==='admin' && <ul>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/add-book`}>
                             <div className='menu-item'>Add Book</div>
                           </NavLink>
                         </ul>}
-                        {getToken() && <ul hidden={!(getToken()!==null&&getUser().role!=='faculty')}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/orders`}>
+                        {getToken() && getUser().role!=='faculty' && <ul>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/orders`}>
                             <div className='menu-item'>Orders</div>
                           </NavLink>
                         </ul>}
-                        {getToken() && <ul hidden={!(getToken()!==null&&getUser().role==='student')}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/get-favorites`}>
+                        {getToken() && getUser().role==='student' && <ul>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/get-favorites`}>
                             <div className='menu-item'>Favorites</div>
                           </NavLink>
                         </ul>}
@@ -145,7 +146,7 @@ function Dashboard() {
                   </div>
                   <div className='header-top-right'>
                     <li>
-                      {!getToken() && <ul hidden={getToken()!==null}>
+                      {!getToken() && <ul>
                         <div class="dropdown">
                           <button class="dropbtn">Log in</button>
                           <div class="dropdown-content">
@@ -155,7 +156,7 @@ function Dashboard() {
                           </div>
                         </div> 
                       </ul>}
-                      {!getToken() && <ul hidden={getToken()!==null}>
+                      {!getToken() && <ul>
                         <div class="dropdown">
                           <button class="dropbtn">Register</button>
                           <div class="dropdown-content">
@@ -165,9 +166,9 @@ function Dashboard() {
                           </div>
                         </div> 
                       </ul>}
-                      {getToken() && <ul hidden={getToken()===null}>
+                      {getToken() && <ul>
                         <div class="dropdown">
-                          <button class="dropbtn">{getToken()?getUser().name:''}</button>
+                          <button class="dropbtn">{getUser().name}</button>
                           <div class="dropdown-content">
                             <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
                             <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
