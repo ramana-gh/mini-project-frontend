@@ -59,7 +59,7 @@ function Dashboard() {
             <div className='header'>
               <div>
                 <div className='header-top-left'>
-                  <NavLink exact activeClassName="active" to="/home">
+                  <NavLink exact activeClassName="active" to={`/${getToken()?getUser().role:''}/home`}>
                   <li>
                     <ul><img src={rgukt_logo} alt='rgukt_logo' /></ul>
                     <ul><p className='sep'>|</p></ul>
