@@ -50,15 +50,17 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 function Dashboard() {
-  var token;
+  var token = false;
 
   useEffect(() => {
-    token = getToken();
-    if (!token) {
+    token = true;
+    const t = getToken();
+    if (!t) {
+      token = false;
       return;
     }
 
-    axios.get(`http://localhost:3001/student/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/student/verifyToken`, {headers: {authorization: `Bearer ${t}`}})
     .then(response => {
       setUserSession(response.data.token, response.data.user);
     })
