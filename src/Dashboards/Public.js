@@ -143,7 +143,7 @@ function Dashboard() {
                           </div> 
                         </ul>
                       </li>
-                      <li hidden={getToken()==null}>
+                      <li hidden={getToken()?false:true}>
                         <ul>
                           <div class="dropdown">
                             <button class="dropbtn">{getToken()?getUser().name:''}</button>
