@@ -23,7 +23,7 @@ function Logout(props) {
     });
   }
 
-  return <div><h1 className="info" onLoad={handleLogout} >You are logged out.</h1></div>
+  return <div><h1  style={{color: 'yellow'}} className="info" onLoad={handleLogout} >You are logged out.</h1></div>
 }
 
 export default Logout;

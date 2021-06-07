@@ -58,7 +58,7 @@ function SearchBooks(props) {
     const token = getToken();
     setLoading(true);
 
-    let tagArr = [], authorArr = [], editionArr = [], ratingArr = ['0'];
+    let tagArr = [], authorArr = [], editionArr = [], ratingArr = [];
     for (let r of selectedTags) { while (Array.isArray(r)) r = r[0]; tagArr = [...tagArr, r]; }
     for (let r of selectedAuthors) { while (Array.isArray(r)) r = r[0]; authorArr = [...authorArr, r]; }
     for (let r of selectedEditions) { while (Array.isArray(r)) r = r[0]; editionArr = [...editionArr, r]; }

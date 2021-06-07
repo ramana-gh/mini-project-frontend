@@ -194,8 +194,7 @@ function Orders(props) {
         </div>
         <div>
             {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-            <div><h1 className="info" hidden={!selected===0?true:false}>Select Any Tab.</h1></div>
-            <div><h1 className="info" hidden={orders.length>0?true:false}>No Orders.</h1></div>
+            <div><h1 style={{color: 'yellow'}} className="info" hidden={orders.length>0?true:false}>No Orders.</h1></div>
             <div hidden={extend}>
                 {orders.map((x, i) => {
                 return (
