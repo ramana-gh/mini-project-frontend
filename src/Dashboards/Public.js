@@ -76,7 +76,7 @@ function Dashboard() {
                 <div className='header-top-left'>
                   <NavLink exact activeClassName="active" to={'/home'}>
                   <li>
-                    <ul><img src={rgukt_logo} alt='rgukt_logo' /></ul>
+                    <ul><img src={rgukt_logo} alt='rgukt_logo'/></ul>
                     <ul><p className='sep'>|</p></ul>
                     <ul>
                     <div className='app-name'>
