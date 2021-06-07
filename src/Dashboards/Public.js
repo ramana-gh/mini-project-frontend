@@ -46,28 +46,26 @@ import StudentOrders from '../Components/Student/Orders';
 
 import NotFound from '../Components/Public/NotFound';
 import { getToken, getUser, removeUserSession, setUserSession } from '../Utils/Common';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Dashboard() {
-  var token = false;
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    token = true;
-    const t = getToken();
-    if (!t) {
-      token = false;
+    setToken(getToken());
+    if (!token) {
       return;
     }
 
-    axios.get(`http://localhost:3001/student/verifyToken`, {headers: {authorization: `Bearer ${t}`}})
+    axios.get(`http://localhost:3001/student/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setUserSession(response.data.token, response.data.user);
     })
     .catch(error => {
       removeUserSession();
     });
-  }, []);
+  }, [token]);
 
   return (
     <div className='Public'>
