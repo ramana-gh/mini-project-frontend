@@ -83,27 +83,27 @@ function Dashboard() {
                           </NavLink>
                         </ul>
                         <ul hidden={getToken()==null}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/home`}>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/home`}>
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
                         <ul hidden={getToken()==null}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/search-books`}>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/search-books`}>
                             <div className='menu-item'>Search</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={!(getToken()!=null&&getUser()=='admin')}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/add-book`}>
+                        <ul hidden={!(getToken()!=null&&getUser().role=='admin')}>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/add-book`}>
                             <div className='menu-item'>Add Book</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={!(getToken()!=null&&getUser()!='faculty')}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/orders`}>
+                        <ul hidden={!(getToken()!=null&&getUser().role!='faculty')}>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/orders`}>
                             <div className='menu-item'>Orders</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={!(getToken()!=null&&getUser()=='student')}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/get-favorites`}>
+                        <ul hidden={!(getToken()!=null&&getUser().role=='student')}>
+                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/get-favorites`}>
                             <div className='menu-item'>Favorites</div>
                           </NavLink>
                         </ul>
@@ -146,7 +146,7 @@ function Dashboard() {
                       <li hidden={getToken()==null}>
                         <ul>
                           <div class="dropdown">
-                            <button class="dropbtn">{getUser().name}</button>
+                            <button class="dropbtn">{getToken()?getUser().name:''}</button>
                             <div class="dropdown-content">
                               <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
                               <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
