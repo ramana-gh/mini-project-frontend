@@ -110,26 +110,26 @@ function Dashboard() {
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
-                        <ul hidden={getToken()===null}>
+                        {getToken() && <ul hidden={getToken()===null}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/search-books`}>
                             <div className='menu-item'>Search</div>
                           </NavLink>
-                        </ul>
-                        <ul hidden={!(getToken()!==null&&getUser().role==='admin')}>
+                        </ul>}
+                        {getToken() && <ul hidden={!(getToken()!==null&&getUser().role==='admin')}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/add-book`}>
                             <div className='menu-item'>Add Book</div>
                           </NavLink>
-                        </ul>
-                        <ul hidden={!(getToken()!==null&&getUser().role!=='faculty')}>
+                        </ul>}
+                        {getToken() && <ul hidden={!(getToken()!==null&&getUser().role!=='faculty')}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/orders`}>
                             <div className='menu-item'>Orders</div>
                           </NavLink>
-                        </ul>
-                        <ul hidden={!(getToken()!==null&&getUser().role==='student')}>
+                        </ul>}
+                        {getToken() && <ul hidden={!(getToken()!==null&&getUser().role==='student')}>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/get-favorites`}>
                             <div className='menu-item'>Favorites</div>
                           </NavLink>
-                        </ul>
+                        </ul>}
                         <ul>
                           <NavLink className='white' activeClassName="active" to="/about">
                             <div className='menu-item'>About</div>
@@ -145,7 +145,7 @@ function Dashboard() {
                   </div>
                   <div className='header-top-right'>
                     <li>
-                      <ul hidden={getToken()!==null}>
+                      {!getToken() && <ul hidden={getToken()!==null}>
                         <div class="dropdown">
                           <button class="dropbtn">Log in</button>
                           <div class="dropdown-content">
@@ -154,8 +154,8 @@ function Dashboard() {
                             <NavLink activeClassName="active" to="/student/login">Student</NavLink>
                           </div>
                         </div> 
-                      </ul>
-                      <ul hidden={getToken()!==null}>
+                      </ul>}
+                      {!getToken() && <ul hidden={getToken()!==null}>
                         <div class="dropdown">
                           <button class="dropbtn">Register</button>
                           <div class="dropdown-content">
@@ -164,8 +164,8 @@ function Dashboard() {
                             <NavLink activeClassName="active" to="/student/register">Student</NavLink>
                           </div>
                         </div> 
-                      </ul>
-                      <ul hidden={getToken()===null}>
+                      </ul>}
+                      {getToken() && <ul hidden={getToken()===null}>
                         <div class="dropdown">
                           <button class="dropbtn">{getToken()?getUser().name:''}</button>
                           <div class="dropdown-content">
@@ -173,7 +173,7 @@ function Dashboard() {
                             <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
                           </div>
                         </div> 
-                      </ul>
+                      </ul>}
                     </li>
                   </div>
                 </div>
