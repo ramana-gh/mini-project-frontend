@@ -121,40 +121,40 @@ function Dashboard() {
                     </div>
                   </div>
                   <div className='header-top-right'>
-                  <li hidden={getToken()===null}>
-                        <ul>
-                          <div class="dropdown">
-                            <button class="dropbtn">{getToken()?getUser().name:''}</button>
-                            <div class="dropdown-content">
-                              <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
-                              <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
-                            </div>
-                          </div> 
-                        </ul>
-                      </li>
-                      <li hidden={getToken()!==null}>
-                        <ul>
-                          <div class="dropdown">
-                            <button class="dropbtn">Log in</button>
-                            <div class="dropdown-content">
-                              <NavLink activeClassName="active" to="/admin/login">Admin</NavLink>
-                              <NavLink activeClassName="active" to="/faculty/login">Faculty</NavLink>
-                              <NavLink activeClassName="active" to="/student/login">Student</NavLink>
-                            </div>
-                          </div> 
-                        </ul>
-                        <ul>
-                          <div class="dropdown">
-                            <button class="dropbtn">Register</button>
-                            <div class="dropdown-content">
-                              <NavLink activeClassName="active" to="/admin/register">Admin</NavLink>
-                              <NavLink activeClassName="active" to="/faculty/register">Faculty</NavLink>
-                              <NavLink activeClassName="active" to="/student/register">Student</NavLink>
-                            </div>
-                          </div> 
-                        </ul>
-                      </li>
-                    </div>
+                    <li hidden={getToken()===null}>
+                      <ul>
+                        <div class="dropdown">
+                          <button class="dropbtn">{getToken()?getUser().name:''}</button>
+                          <div class="dropdown-content">
+                            <NavLink exact activeClassName="active" to="/admin/profile">Profile</NavLink>
+                            <NavLink exact activeClassName="active" to="/admin/logout">Log out</NavLink>
+                          </div>
+                        </div> 
+                      </ul>
+                    </li>
+                    <li hidden={getToken()!==null}>
+                      <ul>
+                        <div class="dropdown">
+                          <button class="dropbtn">Log in</button>
+                          <div class="dropdown-content">
+                            <NavLink activeClassName="active" to="/admin/login">Admin</NavLink>
+                            <NavLink activeClassName="active" to="/faculty/login">Faculty</NavLink>
+                            <NavLink activeClassName="active" to="/student/login">Student</NavLink>
+                          </div>
+                        </div> 
+                      </ul>
+                      <ul>
+                        <div class="dropdown">
+                          <button class="dropbtn">Register</button>
+                          <div class="dropdown-content">
+                            <NavLink activeClassName="active" to="/admin/register">Admin</NavLink>
+                            <NavLink activeClassName="active" to="/faculty/register">Faculty</NavLink>
+                            <NavLink activeClassName="active" to="/student/register">Student</NavLink>
+                          </div>
+                        </div> 
+                      </ul>
+                    </li>
+                  </div>
                 </div>
               </div>
             </div>
