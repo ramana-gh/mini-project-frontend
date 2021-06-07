@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Redirect, Route, NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 import rgukt_logo from '../rgukt_logo.png'
 import PublicRoute from '../Utils/PublicRoute';
@@ -49,9 +51,30 @@ import StudentGetFavorites from '../Components/Student/GetFavorites';
 import StudentOrders from '../Components/Student/Orders';
 
 import NotFound from '../Components/Public/NotFound';
-import { getToken, getUser } from '../Utils/Common';
+import { getToken, getUser, setUserSession, removeUserSession } from '../Utils/Common';
 
 function Dashboard() {
+  const [authLoading, setAuthLoading] = useState(true);
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      axios.get(`http://localhost:3001/${getUser().role}/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
+      .then(response => {
+        setUserSession(response.data.token, response.data.user);
+        setAuthLoading(false);
+      })
+      .catch(error => {
+        removeUserSession();
+        setAuthLoading(false);
+      });
+    }
+  }, []);
+
+  if (authLoading && getToken()) {
+    return <div className="content">Checking Authentication...</div>
+  }
+
   return (
     <div className='Public'>
       <Router>
