@@ -1,6 +1,4 @@
-// import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Redirect, Route, NavLink } from 'react-router-dom';
-// import axios from 'axios';
 
 import rgukt_logo from '../rgukt_logo.png'
 import PublicRoute from '../Utils/PublicRoute';
@@ -23,10 +21,6 @@ import FacultyLogout from '../Components/Faculty/Logout';
 import StudentRegister from '../Components/Student/Register';
 import StudentLogin from '../Components/Student/Login';
 import StudentLogout from '../Components/Student/Logout';
-
-// import Admin from '../Dashboards/Admin';
-// import Faculty from '../Dashboards/Faculty';
-// import Student from '../Dashboards/Student';
 
 import AdminHome from '../Components/Admin/Home';
 import AdminProfile from '../Components/Admin/Profile';
@@ -51,31 +45,9 @@ import StudentGetFavorites from '../Components/Student/GetFavorites';
 import StudentOrders from '../Components/Student/Orders';
 
 import NotFound from '../Components/Public/NotFound';
-// import { getToken, getUser, setUserSession, removeUserSession } from '../Utils/Common';
 import { getToken, getUser } from '../Utils/Common';
 
 function Dashboard() {
-  // const [authLoading, setAuthLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const token = getToken();
-  //   if (token) {
-  //     axios.get(`http://localhost:3001/${getUser().role}/verifyToken`, {headers: {authorization: `Bearer ${token}`}})
-  //     .then(response => {
-  //       setUserSession(response.data.token, response.data.user);
-  //       setAuthLoading(false);
-  //     })
-  //     .catch(error => {
-  //       removeUserSession();
-  //       setAuthLoading(false);
-  //     });
-  //   }
-  // }, []);
-
-  // if (authLoading && getToken()) {
-  //   return <div className="content">Checking Authentication...</div>
-  // }
-
   return (
     <div className='Public'>
       <Router>
@@ -106,11 +78,6 @@ function Dashboard() {
                             <div className='menu-item'>Home</div>
                           </NavLink>
                         </ul>
-                        {/* <ul hidden={getToken()===null}>
-                          <NavLink  className='white' exact activeClassName="active" to={`/${getToken()?getUser().role:''}/home`}>
-                            <div className='menu-item'>Home</div>
-                          </NavLink>
-                        </ul> */}
                         {getToken() && <ul>
                           <NavLink  className='white' exact activeClassName="active" to={`/${getUser().role}/search-books`}>
                             <div className='menu-item'>Search</div>
@@ -224,12 +191,6 @@ function Dashboard() {
                 <StudentRoute exact path='/student/logout' component={StudentLogout} />
                 <PublicRoute exact path='/student/delete' component={Delete} />
                 <PublicRoute exact path='/student/reset' component={Reset} />
-                {/* <AdminRoute path='/admin/home' component={Admin} /> */}
-                {/* <FacultyRoute path='/faculty/home' component={Faculty} /> */}
-                {/* <StudentRoute path='/student/home' component={Student} /> */}
-                {/* <Route path='/admin' component={Admin} /> */}
-                {/* <Route path='/faculty' component={Faculty} /> */}
-                {/* <Route path='/student' component={Student} /> */}
                 <Route component={NotFound} />
               </Switch>
             </div>
