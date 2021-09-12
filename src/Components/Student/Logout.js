@@ -6,13 +6,14 @@ function Logout(props) {
   const [loading, setLoading] = useState(false);
   const studentId = getUser().studentId;
   const [error, setError] = useState(null);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   removeUserSession();
 
   const handleLogout = () => {
     setError(error);
     setLoading(loading);
-    axios.post('https://department-library.herokuapp.com/student/logout', { studentId }).then(response => {
+    axios.post(`${url}/student/logout`, { studentId }).then(response => {
       setLoading(false);
       removeUserSession();
       props.history.push('/student/logout');

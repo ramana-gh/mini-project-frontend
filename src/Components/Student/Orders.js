@@ -13,6 +13,7 @@ function Orders(props) {
   const [selected, setSelected] = useState(0);
   const [extend, setExtend] = useState(false);
   const [flag, setFlag] = useState(1);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetchNewOrders = () => {
     setSelected(1);
@@ -24,7 +25,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/student/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -46,7 +47,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/student/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -68,7 +69,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/student/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -90,7 +91,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/student/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -112,7 +113,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/student/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -132,7 +133,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`https://department-library.herokuapp.com/student/cancel-order/${isbn}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${url}/student/cancel-order/${isbn}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -163,7 +164,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.patch('https://department-library.herokuapp.com/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch('${url}/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);

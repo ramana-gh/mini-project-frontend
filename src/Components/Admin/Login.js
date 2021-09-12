@@ -19,11 +19,12 @@ function Login(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   let time = null;
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleLogin = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/login', { adminId: adminId.value, password: password.value }).then(response => {
+    axios.post(`${url}/admin/login`, { adminId: adminId.value, password: password.value }).then(response => {
       setLoading(false);
       setUserSession(response.data.token, response.data.user);
       alert(response.data.message);
@@ -54,7 +55,7 @@ function Login(props) {
   const handleForgotPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/forgot-password', { adminId: adminId.value })
+    axios.post(`${url}/admin/forgot-password`, { adminId: adminId.value })
     .then(response => {
       setLoading(false);
       setMobile(response.data.mobile);
@@ -71,7 +72,7 @@ function Login(props) {
     setLoading(true);
     clearTimeout(myTimeout);
     clearInterval(myInterval);
-    axios.post('https://department-library.herokuapp.com/admin/send-otp', { mobile })
+    axios.post(`${url}/admin/send-otp`, { mobile })
     .then(response => {
       setLoading(false);
       setRequestId(response.data.request_id);
@@ -107,7 +108,7 @@ function Login(props) {
   const handleVerifyOtp = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/verify-otp', { otp: otp.value, requestId })
+    axios.post(`${url}/admin/verify-otp`, { otp: otp.value, requestId })
     .then(response => {
       setLoading(false);
       if (response.status === 200) {
@@ -131,7 +132,7 @@ function Login(props) {
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/reset-password', { adminId: adminId.value, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post(`${url}/admin/reset-password`, { adminId: adminId.value, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

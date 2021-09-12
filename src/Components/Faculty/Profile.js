@@ -14,6 +14,7 @@ function Profile(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setEditMode(false);
@@ -24,7 +25,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.user);
       setLoading(false);
@@ -56,7 +57,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.patch('https://department-library.herokuapp.com/faculty/update-profile', { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${url}/faculty/update-profile`, { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -78,7 +79,7 @@ function Profile(props) {
     }
     removeUserSession();
     setLoading(true);
-    axios.delete('https://department-library.herokuapp.com/faculty/delete-account', {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${url}/faculty/delete-account`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

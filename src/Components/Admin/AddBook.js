@@ -14,12 +14,13 @@ function AddBook(props) {
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleAddBook = () => {
     setError(null);
     setLoading(true);
     const token = getToken();
-    axios.post('https://department-library.herokuapp.com/admin/add-book', { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${url}/admin/add-book`, { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

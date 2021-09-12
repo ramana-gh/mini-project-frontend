@@ -19,11 +19,12 @@ function SearchBooks(props) {
   const [recommendedBooksByPublication, setRecommendedBooksByPublication] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const url = 'https://department-library-backend.herokuapp.com';
   
   const handleInit = () => {
     const token = getToken();
     setLoading(true);
-    axios.get('https://department-library.herokuapp.com/student/get-filters', {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-filters`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setRatings([...response.data.ratings]);
@@ -41,7 +42,7 @@ function SearchBooks(props) {
   const handleGetRecommendedBooks = () => {
     const token = getToken();
     setLoading(true);
-    axios.get('https://department-library.herokuapp.com/student/get-recommended-books', {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-recommended-books`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setRecommendedBooksByAuthors([...response.data.books.recommendedBooksByAuthors]);
@@ -64,7 +65,7 @@ function SearchBooks(props) {
     for (let r of selectedEditions) { while (Array.isArray(r)) r = r[0]; editionArr = [...editionArr, r]; }
     for (let r of selectedRatings) { while (Array.isArray(r)) r = r[0]; ratingArr = [...ratingArr, r]; }
 
-    axios.post('https://department-library.herokuapp.com/student/search-books', {name: name.value, tags: tagArr, authors: authorArr, editions: editionArr, ratings: ratingArr}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${url}/student/search-books`, {name: name.value, tags: tagArr, authors: authorArr, editions: editionArr, ratings: ratingArr}, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setBooks([...response.data.books]);

@@ -12,6 +12,7 @@ function Profile(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setEditMode(false);
@@ -22,7 +23,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-profile`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/admin/get-profile`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.user);
       setLoading(false);
@@ -52,7 +53,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.patch('https://department-library.herokuapp.com/admin/update-profile', { adminId: adminId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${url}/admin/update-profile`, { adminId: adminId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -74,7 +75,7 @@ function Profile(props) {
     }
     removeUserSession();
     setLoading(true);
-    axios.delete('https://department-library.herokuapp.com/admin/delete-account', {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${url}/admin/delete-account`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

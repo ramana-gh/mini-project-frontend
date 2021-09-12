@@ -17,6 +17,7 @@ function GetBook(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setEditMode(false);
@@ -27,7 +28,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/admin/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.book);
       setLoading(false);
@@ -57,7 +58,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.patch('https://department-library.herokuapp.com/admin/update-book', { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${url}/admin/update-book`, { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -78,7 +79,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`https://department-library.herokuapp.com/admin/delete-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${url}/admin/delete-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

@@ -11,6 +11,7 @@ function Register(props) {
   const email = useFormInput('');
   const address = useFormInput('');
   const password = useFormInput('');
+  const url = 'https://department-library-backend.herokuapp.com';
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,7 +19,7 @@ function Register(props) {
   const handleRegister = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/student/register', { studentId: studentId.value, name: name.value, joinYear: joinYear.value, sem: sem.value, class: Class.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
+    axios.post(`${url}/student/register`, { studentId: studentId.value, name: name.value, joinYear: joinYear.value, sem: sem.value, class: Class.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

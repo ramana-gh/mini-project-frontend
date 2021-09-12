@@ -7,6 +7,7 @@ function GetFavorites(props) {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setError(error);
@@ -15,7 +16,7 @@ function GetFavorites(props) {
     if (!token) {
       return;
     }
-    axios.get('https://department-library.herokuapp.com/student/get-favorites', {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${url}/student/get-favorites`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setBooks([...response.data.books]);
