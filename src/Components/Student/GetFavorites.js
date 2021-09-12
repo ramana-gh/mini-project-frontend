@@ -15,7 +15,7 @@ function GetFavorites(props) {
     if (!token) {
       return;
     }
-    axios.get('http://localhost:3001/student/get-favorites', {headers: {authorization: `Bearer ${token}`}})
+    axios.get('https://department-library.herokuapp.com/student/get-favorites', {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setBooks([...response.data.books]);
@@ -31,7 +31,7 @@ function GetFavorites(props) {
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
       <div className='books-fill' >
         <div>
-          <h1 style={{color: 'yellow'}} className="info" hidden={books.length>0?true:false}>You haven't favorited any books yet.</h1>
+          <h1 className="info" hidden={books.length>0?true:false}>You haven't favorited any books yet.</h1>
         </div>
         <div hidden={books.length>0?false:true}>
           {books.map((x, i) => {

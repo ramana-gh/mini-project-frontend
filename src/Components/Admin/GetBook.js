@@ -27,7 +27,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`http://localhost:3001/admin/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/admin/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.book);
       setLoading(false);
@@ -57,7 +57,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.patch('http://localhost:3001/admin/update-book', { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch('https://department-library.herokuapp.com/admin/update-book', { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -78,7 +78,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`http://localhost:3001/admin/delete-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`https://department-library.herokuapp.com/admin/delete-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

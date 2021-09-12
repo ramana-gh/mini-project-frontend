@@ -36,7 +36,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`http://localhost:3001/student/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/student/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       handleFetchFavorite();
       handleFetchOrder();
@@ -68,7 +68,7 @@ function GetBook(props) {
     if (!token) {
       return;
     }
-    axios.get(`http://localhost:3001/student/check-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/student/check-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setFavorite(response.data.value);
     })
@@ -85,7 +85,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`http://localhost:3001/student/get-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`https://department-library.herokuapp.com/student/get-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setUnordered(response.data.order.returned||response.data.order.canceled);
       setOrdered(!(response.data.order.returned||response.data.order.canceled)&&!response.data.order.extended);
@@ -107,7 +107,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post('http://localhost:3001/student/add-favorite', {isbn: isbn.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('https://department-library.herokuapp.com/student/add-favorite', {isbn: isbn.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -128,7 +128,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`http://localhost:3001/student/remove-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`https://department-library.herokuapp.com/student/remove-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -149,7 +149,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post('http://localhost:3001/student/order-book', {isbn: isbn.value, days: days.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('https://department-library.herokuapp.com/student/order-book', {isbn: isbn.value, days: days.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -175,7 +175,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.patch('http://localhost:3001/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch('https://department-library.herokuapp.com/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -198,7 +198,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`http://localhost:3001/student/cancel-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`https://department-library.herokuapp.com/student/cancel-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);

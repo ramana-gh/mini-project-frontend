@@ -12,7 +12,7 @@ function Logout(props) {
   const handleLogout = () => {
     setError(error);
     setLoading(loading);
-    axios.post('http://localhost:3001/faculty/logout', { facultyId }).then(response => {
+    axios.post('https://department-library.herokuapp.com/faculty/logout', { facultyId }).then(response => {
       setLoading(false);
       removeUserSession();
       props.history.push('/faculty/logout');
@@ -23,7 +23,7 @@ function Logout(props) {
     });
   }
 
-  return <div><h1 style={{color: 'yellow'}} className="info" onLoad={handleLogout} >You are logged out.</h1></div>
+  return <div><h1  style={{color: 'yellow'}} className="info" onLoad={handleLogout} >You are logged out.</h1></div>
 }
 
 export default Logout;
