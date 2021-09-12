@@ -24,7 +24,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.user);
       setLoading(false);
@@ -56,7 +56,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.patch('https://department-library.herokuapp.com/faculty/update-profile', { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch('http://localhost:3001/faculty/update-profile', { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -78,7 +78,7 @@ function Profile(props) {
     }
     removeUserSession();
     setLoading(true);
-    axios.delete('https://department-library.herokuapp.com/faculty/delete-account', {headers: {authorization: `Bearer ${token}`}})
+    axios.delete('http://localhost:3001/faculty/delete-account', {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -98,7 +98,6 @@ function Profile(props) {
   return (
       <div onLoad={handleFetch}>
         <div className='formfill' style={{'pointer-events': editMode?'auto':'none'}}>
-          <p style={{ color: 'red', margin: '0px 0px 10px 0px', textAlign: 'center' }}>Note: All fields are mandatory.</p>
           <div>
             <text>Faculty ID: </text>
             <input type="text" {...facultyId}/>

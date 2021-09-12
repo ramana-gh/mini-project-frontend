@@ -19,7 +19,7 @@ function AddBook(props) {
     setError(null);
     setLoading(true);
     const token = getToken();
-    axios.post('https://department-library.herokuapp.com/admin/add-book', { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/add-book', { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

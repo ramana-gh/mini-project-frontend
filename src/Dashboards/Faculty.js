@@ -59,7 +59,7 @@ function Dashboard() {
                   <div className='app-name'>
                     <h1 className='white'>RGUKT Basar</h1>
                     <h2 className='white'>Department Library</h2>
-                    <p className='white'>(Computer Science Engineering)</p>
+                    <p className='white'>(Computer Science and Engineering)</p>
                   </div>
                   </ul>
                 </li>

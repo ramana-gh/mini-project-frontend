@@ -17,7 +17,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/admin/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -38,7 +38,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/admin/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -59,7 +59,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/admin/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -80,7 +80,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/admin/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -101,7 +101,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`https://department-library.herokuapp.com/admin/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`http://localhost:3001/admin/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -121,7 +121,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/accept-order', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/accept-order', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -144,7 +144,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/accept-extend-order', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/accept-extend-order', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -167,7 +167,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/reject-extend-order', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/reject-extend-order', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -190,7 +190,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/send-message', {studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/send-message', {studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       const message = `Dear Student submission nearing for the following book:\nBook Name: ${name}\nISBN: ${isbn}.\nSubmission due in 5 days.`;
@@ -211,7 +211,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/book-returned', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/book-returned', {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -232,7 +232,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/send-message', {studentId: id, message}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post('http://localhost:3001/admin/send-message', {studentId: id, message}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message[0]);

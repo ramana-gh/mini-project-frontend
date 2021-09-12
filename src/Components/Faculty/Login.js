@@ -23,7 +23,7 @@ function Login(props) {
   const handleLogin = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/faculty/login', { facultyId: facultyId.value, password: password.value }).then(response => {
+    axios.post('http://localhost:3001/faculty/login', { facultyId: facultyId.value, password: password.value }).then(response => {
       setLoading(false);
       setUserSession(response.data.token, response.data.user);
       alert(response.data.message);
@@ -54,7 +54,7 @@ function Login(props) {
   const handleForgotPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/faculty/forgot-password', { facultyId: facultyId.value })
+    axios.post('http://localhost:3001/faculty/forgot-password', { facultyId: facultyId.value })
     .then(response => {
       setLoading(false);
       setMobile(response.data.mobile);
@@ -71,7 +71,7 @@ function Login(props) {
     setLoading(true);
     clearTimeout(myTimeout);
     clearInterval(myInterval);
-    axios.post('https://department-library.herokuapp.com/faculty/send-otp', { mobile })
+    axios.post('http://localhost:3001/faculty/send-otp', { mobile })
     .then(response => {
       setLoading(false);
       setRequestId(response.data.request_id);
@@ -107,7 +107,7 @@ function Login(props) {
   const handleVerifyOtp = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/faculty/verify-otp', { otp: otp.value, requestId })
+    axios.post('http://localhost:3001/faculty/verify-otp', { otp: otp.value, requestId })
     .then(response => {
       setLoading(false);
       clearTimeout(myTimeout);
@@ -132,7 +132,7 @@ function Login(props) {
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/faculty/reset-password', { facultyId: facultyId.value, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post('http://localhost:3001/faculty/reset-password', { facultyId: facultyId.value, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

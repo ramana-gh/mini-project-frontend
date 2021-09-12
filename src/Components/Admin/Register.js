@@ -15,7 +15,7 @@ function Register(props) {
   const handleRegister = () => {
     setError(null);
     setLoading(true);
-    axios.post('https://department-library.herokuapp.com/admin/register', { adminId: adminId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
+    axios.post('http://localhost:3001/admin/register', { adminId: adminId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -29,6 +29,7 @@ function Register(props) {
 
   return (
     <div className='formfill'>
+      <p style={{ color: 'red', margin: '0px 0px 10px 0px', textAlign: 'center' }}>Note: All fields are mandatory.</p>
       <div>
         <text>Admin ID: </text>
         <input type="text" {...adminId}/>
