@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getUser } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function ResetPassword(props) {
   const [loading, setLoading] = useState(false);
@@ -8,12 +9,11 @@ function ResetPassword(props) {
   const password = useFormInput('');
   const repeatPassword = useFormInput('');
   const [error, setError] = useState(null);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post(`${url}/admin/reset-password`, { adminId, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post(`${baseUrl}/admin/reset-password`, { adminId, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

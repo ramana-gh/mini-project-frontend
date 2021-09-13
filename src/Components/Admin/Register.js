@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { baseUrl } from '../../shared/baseUrl';
 
 function Register(props) {
   const adminId = useFormInput('');
@@ -11,12 +12,11 @@ function Register(props) {
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleRegister = () => {
     setError(null);
     setLoading(true);
-    axios.post(`${url}/admin/register`, { adminId: adminId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
+    axios.post(`${baseUrl}/admin/register`, { adminId: adminId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value, password: password.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { getToken } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function GetBook(props) {
   const name = useFormInput('');
@@ -17,7 +18,6 @@ function GetBook(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setEditMode(false);
@@ -28,7 +28,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/admin/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/admin/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.book);
       setLoading(false);
@@ -58,7 +58,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.patch(`${url}/admin/update-book`, { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${baseUrl}/admin/update-book`, { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -79,7 +79,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`${url}/admin/delete-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${baseUrl}/admin/delete-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

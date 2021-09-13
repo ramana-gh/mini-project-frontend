@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getToken } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function Orders(props) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState(0);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetchNewOrders = () => {
     setSelected(1);
@@ -18,7 +18,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/admin/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/admin/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -39,7 +39,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/admin/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/admin/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -60,7 +60,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/admin/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/admin/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -81,7 +81,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/admin/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/admin/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -102,7 +102,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/admin/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/admin/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -122,7 +122,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/admin/accept-order`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/accept-order`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -145,7 +145,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/admin/accept-extend-order`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/accept-extend-order`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -168,7 +168,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/admin/reject-extend-order`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/reject-extend-order`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -191,7 +191,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/admin/send-message`, {studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/send-message`, {studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       const message = `Dear Student submission nearing for the following book:\nBook Name: ${name}\nISBN: ${isbn}.\nSubmission due in 5 days.`;
@@ -212,7 +212,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/admin/book-returned`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/book-returned`, {isbn, studentId: orderedBy}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -233,7 +233,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/admin/send-message`, {studentId: id, message}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/send-message`, {studentId: id, message}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message[0]);

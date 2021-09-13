@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { getToken } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function GetBook(props) {
   const name = useFormInput('');
@@ -24,7 +25,6 @@ function GetBook(props) {
   const [unordered, setUnordered] = useState(true);
   const [ordered, setOrdered] = useState(false);
   const [extended, setExtended] = useState(false);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setViewMode(true);
@@ -37,7 +37,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       handleFetchFavorite();
       handleFetchOrder();
@@ -69,7 +69,7 @@ function GetBook(props) {
     if (!token) {
       return;
     }
-    axios.get(`${url}/student/check-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/check-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setFavorite(response.data.value);
     })
@@ -86,7 +86,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setUnordered(response.data.order.returned||response.data.order.canceled);
       setOrdered(!(response.data.order.returned||response.data.order.canceled)&&!response.data.order.extended);
@@ -108,7 +108,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/student/add-favorite`, {isbn: isbn.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/student/add-favorite`, {isbn: isbn.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -129,7 +129,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`${url}/student/remove-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${baseUrl}/student/remove-favorite/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -150,7 +150,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/student/order-book`, {isbn: isbn.value, days: days.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/student/order-book`, {isbn: isbn.value, days: days.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -176,7 +176,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.patch(`${url}/student/extend-order`, {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${baseUrl}/student/extend-order`, {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -199,7 +199,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`${url}/student/cancel-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${baseUrl}/student/cancel-order/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getUser, removeUserSession } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function Logout(props) {
   const [loading, setLoading] = useState(false);
   const facultyId = getUser().facultyId;
   const [error, setError] = useState(null);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   removeUserSession();
 
   const handleLogout = () => {
     setError(error);
     setLoading(loading);
-    axios.post(`${url}/faculty/logout`, { facultyId }).then(response => {
+    axios.post(`${baseUrl}/faculty/logout`, { facultyId }).then(response => {
       setLoading(false);
       removeUserSession();
       props.history.push('/faculty/logout');

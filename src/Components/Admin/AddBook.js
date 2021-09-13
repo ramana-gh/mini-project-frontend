@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getToken } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function AddBook(props) {
   const name = useFormInput('');
@@ -14,13 +15,12 @@ function AddBook(props) {
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleAddBook = () => {
     setError(null);
     setLoading(true);
     const token = getToken();
-    axios.post(`${url}/admin/add-book`, { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/admin/add-book`, { name: name.value, authors, edition: edition.value, isbn: isbn.value, totalCopies: totalCopies.value, publisher: publisher.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

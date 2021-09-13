@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { setUserSession } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function Login(props) {
   const [loading, setLoading] = useState(false);
@@ -19,12 +20,11 @@ function Login(props) {
   const [myTimeout, setMyTimeout] = useState(null);
   const [myInterval, setMyInterval] = useState(null);
   let time = null;
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleLogin = () => {
     setError(null);
     setLoading(true);
-    axios.post(`${url}/faculty/login`, { facultyId: facultyId.value, password: password.value }).then(response => {
+    axios.post(`${baseUrl}/faculty/login`, { facultyId: facultyId.value, password: password.value }).then(response => {
       setLoading(false);
       setUserSession(response.data.token, response.data.user);
       alert(response.data.message);
@@ -55,7 +55,7 @@ function Login(props) {
   const handleForgotPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post(`${url}/faculty/forgot-password`, { facultyId: facultyId.value })
+    axios.post(`${baseUrl}/faculty/forgot-password`, { facultyId: facultyId.value })
     .then(response => {
       setLoading(false);
       setMobile(response.data.mobile);
@@ -72,7 +72,7 @@ function Login(props) {
     setLoading(true);
     clearTimeout(myTimeout);
     clearInterval(myInterval);
-    axios.post(`${url}/faculty/send-otp`, { mobile })
+    axios.post(`${baseUrl}/faculty/send-otp`, { mobile })
     .then(response => {
       setLoading(false);
       setRequestId(response.data.request_id);
@@ -108,7 +108,7 @@ function Login(props) {
   const handleVerifyOtp = () => {
     setError(null);
     setLoading(true);
-    axios.post(`${url}/faculty/verify-otp`, { otp: otp.value, requestId })
+    axios.post(`${baseUrl}/faculty/verify-otp`, { otp: otp.value, requestId })
     .then(response => {
       setLoading(false);
       clearTimeout(myTimeout);
@@ -133,7 +133,7 @@ function Login(props) {
   const handleResetPassword = () => {
     setError(null);
     setLoading(true);
-    axios.post(`${url}/faculty/reset-password`, { facultyId: facultyId.value, password: password.value, repeatPassword: repeatPassword.value })
+    axios.post(`${baseUrl}/faculty/reset-password`, { facultyId: facultyId.value, password: password.value, repeatPassword: repeatPassword.value })
     .then(response => {
       setLoading(false);
       alert(response.data.message);

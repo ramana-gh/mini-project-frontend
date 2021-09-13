@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { getToken } from '../../Utils/Common';
 import { NavLink } from 'react-router-dom';
+import { baseUrl } from '../../shared/baseUrl';
 
 function GetFavorites(props) {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setError(error);
@@ -16,7 +16,7 @@ function GetFavorites(props) {
     if (!token) {
       return;
     }
-    axios.get(`${url}/student/get-favorites`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-favorites`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       setBooks([...response.data.books]);

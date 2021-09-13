@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { getToken, getUser } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function GetBook(props) {
   const name = useFormInput('');
@@ -19,7 +20,6 @@ function GetBook(props) {
   const [viewMode, setViewMode] = useState(true);
   const [rateMode, setRateMode] = useState(false);
   const [tagMode, setTagMode] = useState(false);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setViewMode(true);
@@ -32,7 +32,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/faculty/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/faculty/get-book/${isbn.value}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.book);
       setLoading(false);
@@ -52,7 +52,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/faculty/get-rating/${isbn.value}/${getUser().facultyId}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/faculty/get-rating/${isbn.value}/${getUser().facultyId}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       rating.handleModify(response.data.rating);
       setLoading(false);
@@ -81,7 +81,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/faculty/rate-book`, { isbn: isbn.value, rating: rating.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/faculty/rate-book`, { isbn: isbn.value, rating: rating.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -101,7 +101,7 @@ function GetBook(props) {
       return;
     }
     setLoading(true);
-    axios.post(`${url}/faculty/tag-book`, { isbn: isbn.value, tags }, {headers: {authorization: `Bearer ${token}`}})
+    axios.post(`${baseUrl}/faculty/tag-book`, { isbn: isbn.value, tags }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);

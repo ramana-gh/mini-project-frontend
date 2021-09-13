@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getToken } from '../../Utils/Common';
+import { baseUrl } from '../../shared/baseUrl';
 
 function Orders(props) {
   const name = useFormInput('');
@@ -13,7 +14,6 @@ function Orders(props) {
   const [selected, setSelected] = useState(0);
   const [extend, setExtend] = useState(false);
   const [flag, setFlag] = useState(1);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetchNewOrders = () => {
     setSelected(1);
@@ -25,7 +25,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-new-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -47,7 +47,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-extend-requested-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -69,7 +69,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-submission-nearing-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -91,7 +91,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-accepted-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -113,7 +113,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/student/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/student/get-returned-orders`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setOrders(response.data.orders);
       setLoading(false);
@@ -133,7 +133,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.delete(`${url}/student/cancel-order/${isbn}`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${baseUrl}/student/cancel-order/${isbn}`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
@@ -164,7 +164,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.patch('${url}/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch('${baseUrl}/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);

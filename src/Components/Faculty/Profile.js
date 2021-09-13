@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { getToken, removeUserSession } from '../../Utils/Common';
 import { NavLink } from 'react-router-dom';
+import { baseUrl } from '../../shared/baseUrl';
 
 function Profile(props) {
   const facultyId = useFormInput('');
@@ -14,7 +15,6 @@ function Profile(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false);
-  const url = 'https://department-library-backend.herokuapp.com';
 
   const handleFetch = () => {
     setEditMode(false);
@@ -25,7 +25,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.get(`${url}/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
+    axios.get(`${baseUrl}/faculty/get-profile`, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       PopulateValues(response.data.user);
       setLoading(false);
@@ -57,7 +57,7 @@ function Profile(props) {
       return;
     }
     setLoading(true);
-    axios.patch(`${url}/faculty/update-profile`, { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${baseUrl}/faculty/update-profile`, { facultyId: facultyId.value, name: name.value, mobile: mobile.value, email: email.value, address: address.value }, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
@@ -79,7 +79,7 @@ function Profile(props) {
     }
     removeUserSession();
     setLoading(true);
-    axios.delete(`${url}/faculty/delete-account`, {headers: {authorization: `Bearer ${token}`}})
+    axios.delete(`${baseUrl}/faculty/delete-account`, {headers: {authorization: `Bearer ${token}`}})
     .then(response => {
       setLoading(false);
       alert(response.data.message);
