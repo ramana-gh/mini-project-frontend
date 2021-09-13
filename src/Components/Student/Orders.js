@@ -164,7 +164,7 @@ function Orders(props) {
       return;
     }
     setLoading(true);
-    axios.patch('${baseUrl}/student/extend-order', {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
+    axios.patch(`${baseUrl}/student/extend-order`, {isbn: isbn.value, days: days.value, reason: reason.value}, {headers: {authorization: `Bearer ${token}`}})
     .then((response) => {
       setLoading(false);
       alert(response.data.message);
